@@ -1,0 +1,18 @@
+//
+//  shared-header.pch
+//  leetcode
+//
+//  Created by jeswang on 7/11/14.
+//
+//
+
+#ifndef leetcode_shared_header_pch
+#define leetcode_shared_header_pch
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+#endif

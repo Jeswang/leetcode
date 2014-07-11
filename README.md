@@ -9,9 +9,13 @@ Solving leetcode's problems is a good beginning for practicing my c++ skill.
 ## Feature
 - Debug with Xcode
 - Easy to initialize your own empty project
+	- Runing the following command:
+	
 	```
 	python get-data.py
 	```
-
+	
+	- Replace files in scr/problems with new generated files
+	
 ## Contacts
 [jeswang's blog](blog.jeswang.org)

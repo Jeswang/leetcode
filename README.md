@@ -16,6 +16,6 @@ Solving LeetCode's problems is a good beginning for practicing my c++ skill.
 	```
 	
 	- Replace files in scr/problems with new generated files
-	
-## Contacts
+
+## Contact
 - [jeswang's blog](blog.jeswang.org)

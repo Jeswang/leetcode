@@ -2,7 +2,7 @@ My LeetCode Solution
 ========
 	“工欲善其事，必先利其器”
 ## Why making another LeetCode solution list
-C++ is a basic skill for a programmer, especially for the one who is preparing for an interview. 
+C++ is a basic skill for a programmer, especially for the one who is preparing for a lot of coding interviews. 
 
 Solving LeetCode's problems is a good beginning for practicing my c++ skill. 
 
@@ -18,4 +18,4 @@ Solving LeetCode's problems is a good beginning for practicing my c++ skill.
 	- Replace files in scr/problems with new generated files
 	
 ## Contacts
-[jeswang's blog](blog.jeswang.org)
+- [jeswang's blog](blog.jeswang.org)

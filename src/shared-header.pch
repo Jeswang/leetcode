@@ -12,7 +12,72 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
+#include <sstream>
 
 using namespace std;
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
+
+ListNode *listFromString(string des) {
+    if (des == "NULL") {
+        return NULL;
+    }
+    
+    string remain = des;
+    int number;
+    size_t found = des.find("->");
+    
+    ListNode *rootNode = NULL, *nextNode = NULL, *previousNode = NULL;
+    while (found != string::npos){
+        number = stoi(remain.substr(0, found));
+        
+        nextNode = new ListNode(number);
+        if (rootNode == NULL) {
+            rootNode = nextNode;
+        }
+        else {
+            previousNode->next = nextNode;
+        }
+        previousNode = nextNode;
+
+        remain = remain.substr(found + 2, remain.size() - found - 2);
+        found = remain.find("->");
+    }
+    
+    number = stoi(remain);
+    if (rootNode == NULL) {
+        return new ListNode(number);
+    }
+    else {
+        nextNode = new ListNode(number);
+        previousNode->next = nextNode;
+    }
+    return rootNode;
+}
+
+string stringFromList(ListNode *rootNode) {
+    if (rootNode == NULL) {
+        return "NULL";
+    }
+    
+    stringstream ss;
+    ss<<rootNode->val;
+    
+    ListNode *nextNode = rootNode->next;
+    while (nextNode != NULL) {
+        ss<<"->"<<nextNode->val;
+        nextNode = nextNode->next;
+    }
+    
+    string res;
+    ss>>res;
+    
+    return res;
+}
 
 #endif

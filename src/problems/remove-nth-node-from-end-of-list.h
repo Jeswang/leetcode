@@ -30,6 +30,32 @@ Try to do this in one pass.
 class Solution {
 public:
     ListNode *removeNthFromEnd(ListNode *head, int n) {
+        ListNode *p = head;
         
+        int count = 0;
+        while (p != NULL) {
+            count++;
+            p = p->next;
+        }
+
+        p = head;
+        ListNode *last = NULL;
+        while (count - n != 0) {
+            last = p;
+            p = p->next;
+            count --;
+        }
+        
+        if (last == NULL) {
+            return head->next;
+        }
+        else{
+            last->next = p->next;
+            return head;
+        }
+    }
+    void run(){
+        ListNode *root = listFromString("1->2->3->4->5");
+        cout<<stringFromList(removeNthFromEnd(root, 4));
     }
 };

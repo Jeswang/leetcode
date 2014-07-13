@@ -26,6 +26,51 @@ Given {1,2,3,4}, reorder it to {1,4,2,3}.
 class Solution {
 public:
     void reorderList(ListNode *head) {
+        int len = 0;
+        ListNode *p = head, *previousNode = head, *tempNode = head;
+        while (p != NULL) {
+            len++;
+            p = p->next;
+        }
         
+        if (len<=2) {
+            return;
+        }
+        
+        int count = 0;
+        p = head;
+        while (p != NULL) {
+            count++;
+            tempNode = p->next;
+            if (count >= len/2+2) {
+                p->next = previousNode;
+            }
+            previousNode = p;
+            p = tempNode;
+        }
+        
+        ListNode *endNode = previousNode, *beginNode = head;
+        while (beginNode != endNode) {
+            tempNode = beginNode->next;
+            beginNode->next = endNode;
+            beginNode = tempNode;
+            
+            if (beginNode == endNode) {
+                break;
+            }
+            
+            tempNode = endNode->next;
+            endNode->next = beginNode;
+            endNode = tempNode;
+        }
+        
+        endNode->next = NULL;
+        
+        return;
+    }
+    void run(){
+        ListNode *root = listFromString("1->2->3");
+        reorderList(root);
+        cout<<stringFromList(root);
     }
 };

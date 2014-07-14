@@ -16,15 +16,23 @@
 #include <map>
 #include <unordered_map>
 #include <set>
+#include <stack>
 #include <unordered_set>
 #include <sstream>
-
+#include <cstdlib>
 using namespace std;
 
 struct ListNode {
     int val;
     ListNode *next;
     ListNode(int x) : val(x), next(NULL) {}
+};
+
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
 ListNode *listFromString(string des) {
@@ -82,6 +90,50 @@ string stringFromList(ListNode *rootNode) {
     ss>>res;
     
     return res;
+}
+
+
+string stringFromTree(TreeNode *p) {
+    if (!p) {
+        return "# ";
+    } else {
+        string res;
+        res = to_string(p->val) + " ";
+        res += stringFromTree(p->left);
+        res += stringFromTree(p->right);
+        return res;
+    }
+}
+
+TreeNode* treeFromString(string& des) {
+    if (des.size()==0) {
+        return NULL;
+    }
+    
+    if (des[0] == ' ') {
+        des = des.substr(1, des.size()-1);
+    }
+    
+    if(des[0] == '#'){
+        des = des.substr(min(2, (int)des.size()), max(0, (int)(des.size()-2)) );
+        return NULL;
+    }
+    
+    int token;
+    stringstream ss;
+    ss<<des;
+    ss>>token;
+    
+    std::stringstream tmp;
+    tmp << ss.rdbuf();
+    des = tmp.str();
+    
+    TreeNode *root = new TreeNode(token);
+    
+    root->left = treeFromString(des);
+    root->right = treeFromString(des);
+    
+    return root;
 }
 
 #endif

@@ -24,9 +24,30 @@ Note:
 Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
 */
 
+//TODO: 没有做到 O(n) 空间复杂度
+
 class Solution {
 public:
+    map<string, int> counted;
     int minimumTotal(vector<vector<int> > &triangle) {
+        return minimumTotal(triangle, 0, 0);
+    }
+    
+    int minimumTotal(vector<vector<int> > &triangle, int i, int j) {
+        string key = std::to_string(i) + " " + to_string(j);
         
+        if (counted.find(key) != counted.end()) {
+            return counted[key];
+        }
+        
+        int len = (int)triangle.size();
+        if (i+1 == len) {
+            return triangle[i][j];
+        }
+        else {
+            int result =  triangle[i][j] + fmin(minimumTotal(triangle, i+1, j), minimumTotal(triangle, i+1, j+1));
+            counted[key] = result;
+            return result;
+        }
     }
 };

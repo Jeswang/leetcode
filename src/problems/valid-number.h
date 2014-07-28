@@ -20,6 +20,29 @@ Note: It is intended for the problem statement to be ambiguous. You should gathe
 class Solution {
 public:
     bool isNumber(const char *s) {
+        string str = s;
+        str.erase(remove(str.begin(), str.end(), ' '), str.end());
+        if(str.length() == 0){
+            return false;
+        }
+        
+        char tmp[100];
+        strcpy (tmp, s);
+        char* c = tmp;
+        std::strtod(c, &c);
+        
+        str = c;
+        str.erase(remove(str.begin(), str.end(), ' '), str.end());
+        
+        if(str.length() == 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    void run(){
+        cout<<isNumber("1 ");
         
     }
 };

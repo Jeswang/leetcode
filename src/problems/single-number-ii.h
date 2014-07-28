@@ -16,6 +16,20 @@ Your algorithm should have a linear runtime complexity. Could you implement it w
 class Solution {
 public:
     int singleNumber(int A[], int n) {
+        int ones = 0, twos = 0, xthrees = 0;
+        for(int i = 0; i < n; ++i) {
+            twos |= (ones & A[i]);
+            ones ^= A[i];
+            xthrees = ~(ones & twos);
+            ones &= xthrees;
+            twos &= xthrees;
+        }
         
+        return ones;
+    }
+    
+    void run() {
+        int a[5] = {1, 2, 1, 1};
+        cout<<singleNumber(a, 4);
     }
 };

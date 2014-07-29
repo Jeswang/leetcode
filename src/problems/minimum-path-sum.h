@@ -28,6 +28,8 @@ typedef pair<int,int> ipair;
 #define PB(X) push_back(X)
 #define FD(X, Y) X.find(Y)!=X.end()
 
+#define foreach(container,it) for(typeof((container).begin()) it = (container).begin();it!=(container).end();++it)
+
 class Solution {
 public:
     int m, n;

@@ -56,7 +56,27 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
  */
 class Solution {
 public:
+    vector<vector<int> > result;
     vector<vector<int> > levelOrder(TreeNode *root) {
+        visit(root, 0);
+        //std::reverse(result.begin(), result.end());
+        return result;
+    }
+    
+    void visit(TreeNode* tree, int level) {
+        if (tree == NULL) {
+            return;
+        }
+        
+        int len = (int)result.size();
+        if (level > len - 1) {
+            vector<int> oneLevel;
+            result.push_back(oneLevel);
+        }
+        
+        result[level].push_back(tree->val);
+        visit(tree->left, level+1);
+        visit(tree->right, level+1);
         
     }
 };

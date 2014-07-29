@@ -27,6 +27,27 @@ Given target = 3, return true.
 class Solution {
 public:
     bool searchMatrix(vector<vector<int> > &matrix, int target) {
+        int n = (int)matrix.size();
+        if (n == 0) {
+            return false;
+        }
+        int m = (int)matrix[0].size();
         
+        for (int i=0; i<n; i++) {
+            if (matrix[i][m-1] > target) {
+                for (int j=0; j<m; j++) {
+                    if (matrix[i][j]>target) {
+                        return false;
+                    }
+                    else if(matrix[i][j] == target){
+                        return true;
+                    }
+                }
+            }
+            else if (matrix[i][m-1] == target) {
+                return true;
+            }
+        }
+        return false;
     }
 };

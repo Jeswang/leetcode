@@ -15,9 +15,32 @@ Given s = "Hello World",
 return 5.
 */
 
+#define foreach(container,it) for(auto it = (container).begin();it!=(container).end();++it)
+#define FD(X, Y) (X.find(Y)!=X.end())
+#define SIZE(A) ((int)A.size())
+#define PB(X) push_back(X)
+
 class Solution {
 public:
     int lengthOfLastWord(const char *s) {
-        
+        string str = s;
+        int n = SIZE(str);
+        int count = 0;
+        int lastCount = 0;
+        bool spaceFlag = false;
+        for (int i=0; i<n; i++) {
+            if (str[i] == ' ') {
+                if (spaceFlag == false) {
+                    lastCount = count;
+                    spaceFlag = true;
+                }
+                count = 0;
+            }
+            else {
+                count++;
+                spaceFlag = false;
+            }
+        }
+        return count==0?lastCount:count;
     }
 };

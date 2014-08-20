@@ -42,9 +42,25 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
 class Solution {
 public:
     bool isValidBST(TreeNode *root) {
-        
+        return realIsValidBST(root, INT_MIN, INT_MAX);
+    }
+    bool realIsValidBST(TreeNode *root, int bottom, int top) {
+        if (!root){
+            return true;
+        }
+        bool c = (root->val>bottom&&root->val<top);
+        return c&&realIsValidBST(root->left, bottom, root->val)&&realIsValidBST(root->right, root->val, top);
     }
 };

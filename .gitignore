@@ -19,3 +19,8 @@
 *.exe
 *.out
 *.app
+
+
+leetcode.xcodeproj/project.xcworkspace/xcshareddata/leetcode.xccheckout
+
+leetcode.xcodeproj/project.xcworkspace/xcuserdata/jeswang.xcuserdatad/UserInterfaceState.xcuserstate

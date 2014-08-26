@@ -6,7 +6,7 @@
 //
 //
 
-#include "valid-number.h"
+#include "problems/jump-game.h"
 
 int main(int argc, const char * argv[])
 {

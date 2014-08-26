@@ -1,27 +1,23 @@
-//
-//  jump-game.h
-//
-//  Created by jeswang 27/06/2014.
-//
-
-/*
-Description:
-
-Given an array of non-negative integers, you are initially positioned at the first index of the array.
-
-Each element in the array represents your maximum jump length at that position. 
-
-Determine if you are able to reach the last index.
-
-For example:
-A = [2,3,1,1,4], return true.
-
-A = [3,2,1,0,4], return false.
-*/
-
 class Solution {
 public:
+    map<int, bool> checked;
     bool canJump(int A[], int n) {
-        
+        int canReach = 0;
+        for (int i=0; i<n; i++) {
+            if (i+A[i]>canReach) {
+                canReach = i+A[i];
+            }
+            if (canReach >= n-1) {
+                return true;
+            }
+            if (i + 1 > canReach) {
+                return false;
+            }
+        }
+        return (canReach >= n-1);
+    }
+    void run() {
+        int A[] = {0, 1};
+        cout<<canJump(A, 2);
     }
 };

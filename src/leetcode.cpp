@@ -6,7 +6,7 @@
 //
 //
 
-#include "problems/jump-game.h"
+#include "problems/combination-sum.h"
 
 int main(int argc, const char * argv[])
 {

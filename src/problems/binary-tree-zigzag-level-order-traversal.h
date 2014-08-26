@@ -1,50 +1,3 @@
-//
-//  binary-tree-zigzag-level-order-traversal.h
-//
-//  Created by jeswang 27/06/2014.
-//
-
-/*
-Description:
-Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
-
-For example:
-Given binary tree {3,9,20,#,#,15,7},
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-
-
-return its zigzag level order traversal as:
-
-[
-  [3],
-  [20,9],
-  [15,7]
-]
-
-confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
-OJ's Binary Tree Serialization:
-
-The serialization of a binary tree follows a level order traversal, where '#' signifies a path terminator where no node exists below.
-
-Here's an example:
-
-   1
-  / \
- 2   3
-    /
-   4
-    \
-     5
-
-The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}". 
-
-*/
-
 /**
  * Definition for binary tree
  * struct TreeNode {
@@ -54,9 +7,53 @@ The above binary tree is serialized as "{1,2,3,#,#,4,#,#,5}".
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
+    void run() {
+        string s = "1 2 3";
+        zigzagLevelOrder(treeFromString(s));
+    }
     vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+        vector<vector<int> > res;
+        if(root==NULL) {
+            return res;
+        }
         
+        bool isLeft = true;
+        
+        vector<TreeNode*> tmp;
+        tmp.push_back(root);
+        
+        while(tmp.size()!=0) {
+            res.push_back(getInts(tmp, isLeft));
+            tmp = nextLevel(tmp);
+            isLeft = !isLeft;
+        }
+        return res;
+    }
+    
+    vector<int> getInts(vector<TreeNode*> level, bool isLeft) {
+        vector<int> res;
+        foreach(level, it) {
+            if(isLeft)
+                res.push_back((*it)->val);
+            else
+                res.insert(res.begin(), (*it)->val);
+        }
+        return res;
+    }
+    
+    vector<TreeNode*> nextLevel(vector<TreeNode*> lastLevel) {
+        vector<TreeNode*> res;
+        foreach(lastLevel, it) {
+            if((*it)->left!=NULL) {
+                res.push_back((*it)->left);
+            }
+            if((*it)->right!=NULL) {
+                res.push_back((*it)->right);
+            }
+        }
+        return res;
     }
 };

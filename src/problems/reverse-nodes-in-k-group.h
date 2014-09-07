@@ -29,9 +29,61 @@ For k = 3, you should return: 3->2->1->4->5
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
 class Solution {
 public:
     ListNode *reverseKGroup(ListNode *head, int k) {
+        if(k<=1) {
+            return head;
+        }
+        ListNode *tmp = head;
+        bool flag = true;
         
+        ListNode *begin = head, *end = NULL, *pBegin = NULL;
+        int i = 0;
+        
+        while(tmp != NULL) {
+            i++;
+            tmp = tmp->next;
+            if(i==k) {
+                end = tmp;
+                ListNode *tmp2 = swap(begin, end);
+                if(flag) {
+                    head = tmp2;
+                    flag = false;
+                }
+                else {
+                    pBegin->next = tmp2;
+                }
+                pBegin = begin;
+                begin = end;
+                i = 0;
+            }
+        }
+        return head;
+    }
+    
+    ListNode *swap(ListNode *begin, ListNode *end) {
+        ListNode *tmp = begin->next;
+        begin->next = end;
+        
+        while(tmp!=end) {
+            ListNode *tmp2 = tmp->next;
+            tmp->next = begin;
+            begin = tmp;
+            tmp = tmp2;
+        }
+        return begin;
+    }
+    void run() {
+        ListNode *node = listFromString("1->2->3->4");
+        cout<<stringFromList(reverseKGroup(node, 2));
     }
 };

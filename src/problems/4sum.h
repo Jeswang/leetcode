@@ -22,8 +22,67 @@ The solution set must not contain duplicate quadruplets.
 
 class Solution {
 public:
-    vector<vector<int> > fourSum(vector<int> &num, int target) {
-        sort(num.begin(), num.end());
-        
+    void run() {
+        vector<int> input = {0,0,0};
+        vector<vector<int> > res = fourSum(input, 0);
+        for(auto i:res) {
+            for(auto j:i) {
+                cout<<j;
+            }
+            cout<<endl;
+        }
     }
+    map<int, vector<pair<int, int> > > m;
+    vector<vector<int> > fourSum(vector<int> &num, int target) {
+        unsigned long len = num.size();
+        
+        vector<vector<int> > res;
+
+        if (len==0) {
+            return res;
+        }
+        for(int i=0; i<len-1; i++) {
+            for(int j=i+1; j<len; j++) {
+                int k = num[i] + num[j];
+                if(m.find(k)==m.end()) {
+                    vector<pair<int, int> > tmp;
+                    tmp.push_back(make_pair(i, j));
+                    m[k] = tmp;
+                }
+                else {
+                    m[k].push_back(make_pair(i, j));
+                }
+            }
+        }
+        
+        for(auto i=m.begin(); i!=m.end(); ) {
+            if(m.find(target-(*i).first)!=m.end()) {
+                //找到了，两两匹配
+                vector<pair<int, int> > first, second;
+                first = (*i).second;
+                second = m[target-(*i).first];
+                for(auto j:first)
+                    for(auto k:second) {
+                        vector<int> tmp;
+                        if(j.first==k.second || j.first==k.first || j.second == k.first || j.second == k.second) {
+                            continue;
+                        }
+                        else {
+                            tmp.push_back(num[j.first]);
+                            tmp.push_back(num[j.second]);
+                            tmp.push_back(num[k.first]);
+                            tmp.push_back(num[k.second]);
+                            sort(tmp.begin(), tmp.end());
+                            res.push_back(tmp);
+                        }
+                    }
+                i++;
+            }
+            else {
+                i = m.erase(i);
+            }
+        }
+        return res;
+    }
+    
 };

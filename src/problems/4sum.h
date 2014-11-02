@@ -23,6 +23,7 @@ The solution set must not contain duplicate quadruplets.
 class Solution {
 public:
     vector<vector<int> > fourSum(vector<int> &num, int target) {
+        sort(num.begin(), num.end());
         
     }
 };

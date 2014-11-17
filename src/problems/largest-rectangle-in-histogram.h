@@ -20,7 +20,56 @@ return 10.
 
 class Solution {
 public:
+    void run() {
+        vector<int> a = {4,2,0,3,2,5};
+        cout<<largestRectangleArea(a);
+    }
     int largestRectangleArea(vector<int> &height) {
+        int m = 0;
+        unsigned long len = height.size();
+        stack<int> s;
+        for(int i=0; i<len; i++) {
+            if(s.size()==0 || height[i] > height[s.top()]) {
+                s.push(i);
+            }
+            else {
+                while(s.size()!=0 && height[i] <= height[s.top()]) {
+                    int j = s.top();s.pop();
+                    int h = height[j];
+                    int w = i - (s.size()!=0?s.top()+1:0);
+                    m = max(m, w*h);
+                }
+                
+                s.push(i);
+            }
+        }
         
+        while(s.size()!=0) {
+            int j = s.top();s.pop();
+            int h = height[j];
+            int w = int((s.size()==0)?len:len - s.top() - 1);
+            m = max(m, w*h);
+        }
+        
+        int b = -1;
+        int count = 0;
+        for(int i=0; i<len; i++) {
+            if(b==-1){
+                b = height[i];
+                count = 1;
+            }
+            else {
+                if(height[i] == b) {
+                    count++;
+                    m = max(m, count*b);
+                }
+                else {
+                    b = height[i];
+                    count = 1;
+                }
+            }
+        }
+        
+        return m;
     }
 };

@@ -6,7 +6,7 @@
 //
 //
 
-#include "problems/longest-palindromic-substring.h"
+#include "problems/largest-rectangle-in-histogram.h"
 
 int main(int argc, const char * argv[])
 {

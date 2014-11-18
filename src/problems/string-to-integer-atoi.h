@@ -21,7 +21,53 @@ If no valid conversion could be performed, a zero value is returned. If the corr
 
 class Solution {
 public:
-    int atoi(const char *str) {
-        
+    void run() {
+        cout<<atoi("    10522545459");
     }
+    
+    int multi(int i, int a) {
+        int res = i;
+        for (int j=1; j<a; j++) {
+            res+=i;
+            if ((res>>31&0x1)==1) {
+                return INT_MIN;
+            }
+        }
+        return res;
+    }
+    
+    int atoi(const char* str)
+    {
+        //判断指针是否为NULL
+        assert( str != NULL);
+        //去除字符串前面的空格
+        while(isspace(*str))
+            ++str;
+        //判断正负号
+        int sign = 1;
+        if(*str == '-')
+            sign = -1;
+        if(*str == '-' || *str == '+')
+            ++str;
+        //开始进行转换，直至第一个非数字的字符
+        int result = 0;
+        while(isdigit(*str))
+        {
+            result = multi(result, 10) + (*str-'0');
+            //判断是否发生溢出
+            if(((result>>31)&0x1) == 1)
+            {
+                if(sign > 0)
+                    return INT_MAX;
+                else
+                    return INT_MIN;
+            }
+            
+            ++str;
+        }
+        
+        //返回转换后的结果
+        return result;
+    }
+
 };

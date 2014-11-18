@@ -6,7 +6,7 @@
 //
 //
 
-#include "problems/largest-rectangle-in-histogram.h"
+#include "problems/wildcard-matching.h"
 
 int main(int argc, const char * argv[])
 {
